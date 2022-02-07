@@ -10,6 +10,7 @@ def p_expression(p):
 			| code code"""
 	p[0] = p[1]
 
+
 def p_expression_function_call(p):
 	"""function_call : id OPENB params CLOSEB
 		| reserved OPENB params CLOSEB
@@ -103,8 +104,6 @@ def p_expression_access(p):
 		| other
 	"""
 	global var
-
-
 	# index recursion
 	if len(p) == 5:
 			# Important: p[1] is an instance of var

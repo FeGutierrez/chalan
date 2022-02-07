@@ -52,7 +52,13 @@ tokens = [
 	'CLOSECUR',
 	'ID',
 	'IN',
-	'SEP'
+	'SEP',
+	'ASSIGN_T',
+	'MAS',
+	'MENOS',
+	'MULT',
+	'DIV',
+	'MODULO',
 ] + list(reserved.values())
 
 
@@ -66,6 +72,12 @@ t_OPENCUR = r'\{'
 t_CLOSECUR = r'\}'
 t_SEP = r','
 t_IN = r'->'
+t_ASSIGN_T = r'\='
+t_MAS = r'\+'
+t_MENOS = r'\-'
+t_MULT = r'\*'
+t_DIV = r'\/'
+t_MODULO = r'\%'
 
 def t_ID(t):
     r'[a-zA-Z][a-zA-Z_0-9]*'

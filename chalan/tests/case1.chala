@@ -1,0 +1,4 @@
+matriz = [a,b],[2,3]
+matriz[0]
+matriz[1]
+matriz[2] // falla
