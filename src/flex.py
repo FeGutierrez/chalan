@@ -50,7 +50,9 @@ tokens = [
 	'CLOSEP',
 	'OPENCUR',
 	'CLOSECUR',
-	'ID'
+	'ID',
+	'IN',
+	'SEP'
 ] + list(reserved.values())
 
 

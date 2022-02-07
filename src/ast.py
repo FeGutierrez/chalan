@@ -59,10 +59,14 @@ def friedman(variable: dict):
 
 	return (12/(n*k*(k+1))*sum_R_sqrd) - 3*n*(k+1)
 
+def dotop(variable):
+    pass
+
 functions = {
 	'range': range_of,
 	'size' : size_of,
 	'avg' : avg_of,
 	'friedman': friedman,
+    'dotop': dotop,
 }
 
