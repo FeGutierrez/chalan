@@ -1,6 +1,6 @@
 import ply.yacc as yacc
 from .flex import tokens
-from .utils import internal
+from . import ast
 var = {}
 
 def p_expression(p):
@@ -119,7 +119,7 @@ def p_expression_access(p):
 			if p[3][0] == 0:
 				p[1]['exec'] = p[1]['exec']
 			elif p[3][0] == 'treatments':
-				p[1]['exec'] = internal.transpose(p[1]['exec'])
+				p[1]['exec'] = ast.transpose(p[1]['exec'])
 
 		else:
 			if not type(p[1]['exec'][0]) is list:
@@ -135,14 +135,14 @@ def p_expression_access(p):
 						#  and index retrieves the expected value
 						if (data == p[1]['patients'][index-1] and\
 							 data in p[1]['patients']) or \
-						(data == internal.range_of(p[1]['patients'][index-1]) and\
-							 data in internal.range_of(p[1]['patients'])):
+						(data == ast.range_of(p[1]['patients'][index-1]) and\
+							 data in ast.range_of(p[1]['patients'])):
 							result.append(data)
 
 						# if transpose(data) or transpose(range(data)) exists
 						#  return the information located at data[index-1]
-						elif (data in internal.transpose(p[1]['patients'])) or \
-							(data in internal.transpose(internal.range_of(p[1]['patients']))):
+						elif (data in ast.transpose(p[1]['patients'])) or \
+							(data in ast.transpose(ast.range_of(p[1]['patients']))):
 							result.append(data[index-1])
 
 					# Access to treatments
@@ -151,14 +151,14 @@ def p_expression_access(p):
 
 						# if data or range(data) exists in
 						#  and index retrieves the expected value
-						if (data in p[1]['patients']) or (data in internal.range_of(p[1]['patients'])):
+						if (data in p[1]['patients']) or (data in ast.range_of(p[1]['patients'])):
 							result.append(data[treatment_index])
 
 						# same logic different result ¯\_(ツ)_/¯
-						elif (data == internal.transpose(p[1]['patients'])[treatment_index] and\
-							 data in internal.transpose(p[1]['patients'])) or \
-							(data == internal.transpose(internal.range_of(p[1]['patients']))[treatment_index] and\
-								 data in internal.transpose(internal.range_of(p[1]['patients']))):
+						elif (data == ast.transpose(p[1]['patients'])[treatment_index] and\
+							 data in ast.transpose(p[1]['patients'])) or \
+							(data == ast.transpose(ast.range_of(p[1]['patients']))[treatment_index] and\
+								 data in ast.transpose(ast.range_of(p[1]['patients']))):
 							result.append(data)
 					else:
 						raise TypeError('Index must be integer or string name')
@@ -188,11 +188,11 @@ def p_expression_function(p):
 	if type(p[3]['exec']) is int or type(p[3]['exec']) is float:
 		raise TypeError('Value in function cannot be a number')
 
-	if p[1] in internal.functions.keys():
+	if p[1] in ast.functions.keys():
 		if p[1] != 'friedman':
-			p[3]['exec'] = internal.functions[p[1]](p[3]['exec'])
+			p[3]['exec'] = ast.functions[p[1]](p[3]['exec'])
 		else:
-			p[3]['exec'] = internal.functions[p[1]](p[3])
+			p[3]['exec'] = ast.functions[p[1]](p[3])
 
 	p[0] = p[3]
 
