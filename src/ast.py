@@ -60,7 +60,18 @@ def friedman(variable: dict):
 	return (12/(n*k*(k+1))*sum_R_sqrd) - 3*n*(k+1)
 
 def dotop(variable):
-    pass
+    print("Operación punto")
+    if len(variable) == 4:
+        matrix = variable[0]
+        i = variable[1]
+        j = variable[2]
+        k = variable[3]
+        lenmatrix = len(matrix)
+        for i in range(lenmatrix):
+            l = len(matrix[i])
+            print(l)
+        
+    return 0
 
 functions = {
 	'range': range_of,
