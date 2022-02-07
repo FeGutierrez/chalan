@@ -21,7 +21,7 @@ def p_expression_reserved(p):
 	reserved : IF
 			| ELSE
 			| WHILE
-			| FOR,
+			| FOR
 			| DEF
 			| RETURN
 			| SEN
